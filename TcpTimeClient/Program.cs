@@ -1,32 +1,45 @@
 ﻿namespace Communicator
 {
+    using global::TcpTimeClient.Properties;
     using System;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
 
-    class TcpTimeClient
+    internal class TcpTimeClient
     {
-        const int _port = 9999;
+        private const int _port = 9999;
 
-        static void Main()
+        private static void Main()
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("tr");
+            RunProgram();
+
+            ExitProgram(0);
+        }
+
+        private static void RunProgram()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, _port);
-            
-            var client = new TcpClient();
+
+            TcpClient client = new TcpClient();
             client.Connect(remoteEP);
-            Console.WriteLine("Client End Point: " + client.Client.LocalEndPoint.ToString());
+            Console.WriteLine(Strings.LocalEndPointIs, client.Client.LocalEndPoint);
 
             NetworkStream ns = client.GetStream();
             byte[] bytes = new byte[1024];
             int bytesRead = ns.Read(bytes, 0, bytes.Length);
             Console.WriteLine(Encoding.ASCII.GetString(bytes, 0, bytesRead));
             client.Close();
+        }
 
-            Console.WriteLine("Press enter to exit program...");
+        private static void ExitProgram(int exitCode)
+        {
+            Console.WriteLine(Strings.PressEnterToExitProgram);
             _ = Console.ReadLine();
+            Environment.Exit(exitCode);
         }
     }
 }
