@@ -12,7 +12,6 @@
 
         private static void Main()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("tr");
             RunProgram();
 
             ExitProgram(0);
