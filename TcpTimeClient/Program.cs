@@ -9,7 +9,7 @@
     {
         const int _port = 9999;
 
-        static void Main(string[] args)
+        static void Main()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
@@ -26,7 +26,7 @@
             client.Close();
 
             Console.WriteLine("Press enter to exit program...");
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
     }
 }

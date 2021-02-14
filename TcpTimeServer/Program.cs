@@ -9,7 +9,7 @@
     {
         const int _port = 9999;
 
-        public static void Main(String[] args)
+        public static void Main()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
@@ -30,7 +30,7 @@
             Console.WriteLine($"Server {localEP} stopped listening.");
 
             Console.WriteLine("Press enter to exit program...");
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
 
         static void AcceptAndRespond(TcpListener listener, string message)
