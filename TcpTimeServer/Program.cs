@@ -14,8 +14,6 @@
 
         public static void Main()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("tr");
-
             try
             {
                 SetUpEventHandlers();
